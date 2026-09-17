@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolPortal.Grades.Data;
 using SchoolPortal.Grades.Models;
@@ -9,7 +10,7 @@ namespace SchoolPortal.Grades.Controllers;
 public class GradesController : Controller
 {
     private readonly GradeDbContext _dbContext;
-    private readonly StudentsClient _studentsClient;    
+    private readonly StudentsClient _studentsClient;
 
     public GradesController(GradeDbContext dbContext, StudentsClient studentsClient)
     {
@@ -47,8 +48,16 @@ public class GradesController : Controller
     }
 
 
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
+        var students = await _studentsClient.GetAllStudentsAsync();
+        var studentSelectList = students.Select(s => new 
+        {
+            Id = s.Id,
+            DisplayFormat = $"{s.FirstName} {s.LastName} [ID: {s.Id}]"
+        });
+        
+        ViewBag.StudentsList = new SelectList(studentSelectList, "Id", "DisplayFormat");
         return View();
     }
 
@@ -65,14 +74,14 @@ public class GradesController : Controller
         if (!studentExists)
         {
             ModelState.AddModelError("StudentId", "The selected student does not exist.");
-      
+
             return View(grade);
         }
-     
+
             _dbContext.Grades.Add(grade);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        
+
     }
 
     public async Task<IActionResult> Edit(int? id)
@@ -161,10 +170,3 @@ public class GradesController : Controller
     }
 
 }
-
-
-
-
-
-
-

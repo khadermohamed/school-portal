@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Hero Section -->
+<div class="text-center py-16 relative">
+    <div class="absolute inset-0 flex items-center justify-center opacity-10">
+        <div class="text-[20rem] font-bold gradient-text">SP</div>
+    </div>
+    <div class="relative z-10">
+        <h1 class="text-5xl md:text-7xl font-bold gradient-text mb-6 animate-gradient">
+            Welcome to SchoolPortal
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+            Your centralized hub for seamless student management and academic excellence
+        </p>
+        <div class="flex justify-center gap-4">
+            <a asp-controller="Students" asp-action="Index" 
+               class="px-8 py-4 neon-border rounded-xl text-neon-cyan font-semibold hover:bg-neon-cyan/10 transition-all duration-300 flex items-center gap-2">
+                <i class="bi bi-rocket-takeoff"></i> Get Started
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+    <div class="glass-card rounded-2xl p-6 neon-border hover:animate-glow transition-all duration-300">
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-neon-cyan/20 to-neon-cyan/5 flex items-center justify-center">
+                <i class="bi bi-people-fill text-neon-cyan text-2xl"></i>
+            </div>
+            <div>
+                <p class="text-gray-400 text-sm">Total Students</p>
+                <p class="text-3xl font-bold text-white">Active DB</p>
+            </div>
+        </div>
+    </div>
+    <div class="glass-card rounded-2xl p-6 neon-border hover:animate-glow transition-all duration-300">
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-neon-purple/20 to-neon-purple/5 flex items-center justify-center">
+                <i class="bi bi-journal-check text-neon-purple text-2xl"></i>
+            </div>
+            <div>
+                <p class="text-gray-400 text-sm">Academic Records</p>
+                <p class="text-3xl font-bold text-white">Synced</p>
+            </div>
+        </div>
+    </div>
+    <div class="glass-card rounded-2xl p-6 neon-border hover:animate-glow transition-all duration-300">
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-neon-pink/20 to-neon-pink/5 flex items-center justify-center">
+                <i class="bi bi-cpu-fill text-neon-pink text-2xl"></i>
+            </div>
+            <div>
+                <p class="text-gray-400 text-sm">System Status</p>
+                <p class="text-3xl font-bold text-green-400">Online</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Action Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+    <!-- Students Card -->
+    <div class="glass-card rounded-3xl overflow-hidden group hover:scale-[1.02] transition-all duration-500">
+        <div class="h-2 bg-gradient-to-r from-neon-cyan to-neon-purple"></div>
+        <div class="p-8">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-neon-cyan to-neon-cyan/50 flex items-center justify-center mb-6 group-hover:animate-float">
+                <i class="bi bi-people-fill text-white text-3xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">Students Directory</h3>
+            <p class="text-gray-400 mb-6">
+                Register new students, update profiles, manage enrollments, and browse the complete student database.
+            </p>
+            <a asp-controller="Students" asp-action="Index" 
+               class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-neon-cyan to-neon-purple rounded-xl font-semibold text-white hover:shadow-lg hover:shadow-neon-cyan/30 transition-all duration-300">
+                <i class="bi bi-arrow-right-circle-fill"></i> Open Directory
+            </a>
+        </div>
+    </div>
+
+    <!-- Grades Card -->
+    <div class="glass-card rounded-3xl overflow-hidden group hover:scale-[1.02] transition-all duration-500">
+        <div class="h-2 bg-gradient-to-r from-neon-purple to-neon-pink"></div>
+        <div class="p-8">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-neon-purple to-neon-purple/50 flex items-center justify-center mb-6 group-hover:animate-float">
+                <i class="bi bi-journal-check text-white text-3xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">Grades & Performance</h3>
+            <p class="text-gray-400 mb-6">
+                Record course scores, monitor academic metrics, and view performance evaluations across all subjects.
+            </p>
+            <a href="http://localhost:5002/Grades" 
+               class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl font-semibold text-white hover:shadow-lg hover:shadow-neon-purple/30 transition-all duration-300">
+                <i class="bi bi-arrow-right-circle-fill"></i> Manage Scores
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- System Status Bar -->
+<div class="mt-12 flex justify-center">
+    <div class="glass-card rounded-full px-8 py-4 flex items-center gap-6">
+        <span class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></span>
+            <span class="text-green-400 font-medium">System Operational</span>
+        </span>
+        <span class="w-px h-6 bg-dark-border"></span>
+        <span class="flex items-center gap-2 text-gray-400">
+            <i class="bi bi-layers-half"></i>
+            Multi-Service Mesh Connected
+        </span>
+    </div>
+</div>

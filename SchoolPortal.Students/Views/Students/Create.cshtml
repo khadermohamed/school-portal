@@ -1,0 +1,80 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Add Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Header -->
+<div class="mb-8">
+    <h1 class="text-4xl font-bold gradient-text mb-2">Register New Student</h1>
+    <p class="text-gray-400">Add a new student to the SchoolPortal system</p>
+</div>
+
+<!-- Form Card -->
+<div class="max-w-2xl">
+    <div class="glass-card rounded-3xl overflow-hidden">
+        <div class="h-1 bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink"></div>
+        
+        <form asp-action="Create" class="p-8">
+            <div asp-validation-summary="ModelOnly" class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label asp-for="FirstName" class="block text-sm font-semibold text-neon-cyan mb-2">
+                        <i class="bi bi-person me-2"></i>First Name
+                    </label>
+                    <input asp-for="FirstName" 
+                           class="w-full px-4 py-3 rounded-xl bg-dark-card border border-dark-border text-white placeholder-gray-500 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan outline-none transition-all duration-300"
+                           placeholder="John" />
+                    <span asp-validation-for="FirstName" class="text-red-400 text-sm mt-1 block"></span>
+                </div>
+                <div>
+                    <label asp-for="LastName" class="block text-sm font-semibold text-neon-cyan mb-2">
+                        <i class="bi bi-person me-2"></i>Last Name
+                    </label>
+                    <input asp-for="LastName" 
+                           class="w-full px-4 py-3 rounded-xl bg-dark-card border border-dark-border text-white placeholder-gray-500 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan outline-none transition-all duration-300"
+                           placeholder="Doe" />
+                    <span asp-validation-for="LastName" class="text-red-400 text-sm mt-1 block"></span>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label asp-for="Email" class="block text-sm font-semibold text-neon-cyan mb-2">
+                    <i class="bi bi-envelope me-2"></i>Email Address
+                </label>
+                <input asp-for="Email" 
+                       type="email"
+                       class="w-full px-4 py-3 rounded-xl bg-dark-card border border-dark-border text-white placeholder-gray-500 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan outline-none transition-all duration-300"
+                       placeholder="john.doe@example.com" />
+                <span asp-validation-for="Email" class="text-red-400 text-sm mt-1 block"></span>
+            </div>
+
+            <div class="mb-8">
+                <label asp-for="DateOfBirth" class="block text-sm font-semibold text-neon-cyan mb-2">
+                    <i class="bi bi-calendar-event me-2"></i>Date of Birth
+                </label>
+                <input asp-for="DateOfBirth" 
+                       type="date"
+                       class="w-full px-4 py-3 rounded-xl bg-dark-card border border-dark-border text-white focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan outline-none transition-all duration-300" />
+                <span asp-validation-for="DateOfBirth" class="text-red-400 text-sm mt-1 block"></span>
+            </div>
+
+            <div class="flex items-center justify-between pt-4 border-t border-dark-border">
+                <a asp-action="Index" 
+                   class="px-6 py-3 rounded-xl border border-dark-border text-gray-400 hover:text-white hover:border-gray-500 transition-all duration-300 flex items-center gap-2">
+                    <i class="bi bi-arrow-left"></i> Back to Directory
+                </a>
+                <button type="submit" 
+                        class="px-8 py-3 bg-gradient-to-r from-neon-cyan to-neon-purple rounded-xl font-semibold text-white hover:shadow-lg hover:shadow-neon-cyan/30 transition-all duration-300 flex items-center gap-2">
+                    <i class="bi bi-check-lg"></i> Save Student
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

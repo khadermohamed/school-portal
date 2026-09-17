@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Student>
+
+@{
+    ViewData["Title"] = "Students Directory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+    <div>
+        <h1 class="text-4xl font-bold gradient-text mb-2">Students Directory</h1>
+        <p class="text-gray-400">Manage and view all registered students within the system</p>
+    </div>
+    <a asp-action="Create"
+       class="px-6 py-3 bg-gradient-to-r from-neon-cyan to-neon-purple rounded-xl font-semibold text-white hover:shadow-lg hover:shadow-neon-cyan/30 transition-all duration-300 flex items-center gap-2">
+        <i class="bi bi-person-plus-fill"></i> Add New Student
+    </a>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    var firstStudentId = Model.First().Id;
+    <div class="glass-card rounded-2xl p-4 mb-6 flex flex-wrap items-center gap-4">
+        <span class="text-gray-400 font-medium">Quick Actions:</span>
+        <a asp-action="Edit" asp-route-id="@firstStudentId"
+           class="px-4 py-2 rounded-lg bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/20 transition-all duration-300 flex items-center gap-2">
+            <i class="bi bi-pencil-square"></i> Edit Selected
+        </a>
+        <a asp-action="Details" asp-route-id="@firstStudentId"
+           class="px-4 py-2 rounded-lg bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/30 hover:bg-neon-cyan/20 transition-all duration-300 flex items-center gap-2">
+            <i class="bi bi-eye"></i> View Profile
+        </a>
+        <a asp-action="Delete" asp-route-id="@firstStudentId"
+           class="px-4 py-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/30 hover:bg-red-500/20 transition-all duration-300 flex items-center gap-2">
+            <i class="bi bi-trash"></i> Delete Account
+        </a>
+    </div>
+}
+
+<div class="glass-card rounded-3xl overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink"></div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead>
+                    <tr class="border-b border-dark-border">
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-neon-cyan uppercase tracking-wider">First Name</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-neon-cyan uppercase tracking-wider">Last Name</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-neon-cyan uppercase tracking-wider">Email Address</th>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-neon-cyan uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-dark-border">
+                    @foreach (var student in Model)
+                    {
+                        <tr class="hover:bg-white/5 transition-colors duration-200 group">
+                            <td class="px-6 py-5">
+                                <span class="font-semibold text-white text-lg">@student.FirstName</span>
+                            </td>
+                            <td class="px-6 py-5">
+                                <span class="font-semibold text-white text-lg">@student.LastName</span>
+                            </td>
+                            <td class="px-6 py-5">
+                                <span class="text-gray-400">@student.Email</span>
+                            </td>
+                            <td class="px-6 py-5">
+                                <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <a asp-action="Details" asp-route-id="@student.Id"
+                                       class="p-2 rounded-lg bg-neon-cyan/10 text-neon-cyan hover:bg-neon-cyan/20 transition-all duration-300" title="View">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@student.Id"
+                                       class="p-2 rounded-lg bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 transition-all duration-300" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+
+                                    <a href="http://localhost:5002/Grades/Create?id=@student.Id"
+                                       class="p-2 rounded-lg bg-neon-purple/10 text-neon-purple hover:bg-neon-purple/20 transition-all duration-300" title="Add Grade">
+                                        <i class="bi bi-journal-plus"></i>
+                                    </a>
+
+                                    <a asp-action="Delete" asp-route-id="@student.Id"
+                                       class="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all duration-300" title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="py-16 text-center">
+            <div class="w-20 h-20 rounded-full bg-dark-border/50 flex items-center justify-center mx-auto mb-6">
+                <i class="bi bi-folder-x text-4xl text-gray-500"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-300 mb-2">No Students Found</h3>
+            <p class="text-gray-500 mb-6">Get started by adding your first student to the directory.</p>
+            <a asp-action="Create"
+               class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-neon-cyan to-neon-purple rounded-xl font-semibold text-white hover:shadow-lg hover:shadow-neon-cyan/30 transition-all duration-300">
+                <i class="bi bi-person-plus-fill"></i> Add First Student
+            </a>
+        </div>
+    }
+</div>

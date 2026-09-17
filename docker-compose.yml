@@ -1,6 +1,3 @@
-# docker-compose.yml
-
-```yaml
 version: '3.8'
 
 services:
@@ -9,7 +6,7 @@ services:
     container_name: schoolportal-sqlserver
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=${SA_PASSWORD}
+      - SA_PASSWORD=${DB_PASSWORD}
       - MSSQL_PID=Express
     ports:
       - "1433:1433"
@@ -28,7 +25,7 @@ services:
       - "5001:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=${CONNECTION_STRING}
+      - ConnectionStrings__DefaultConnection=${STUDENTS_CONNECTION_STRING}
     depends_on:
       - sqlserver
     networks:
@@ -45,7 +42,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - Services__StudentsUrl=http://students-mvc:8080
-      - connectionString__DefaultConnection=${CONNECTION_STRING_GRADE}
+      - ConnectionStrings__DefaultConnection=${GRADES_CONNECTION_STRING}
     depends_on:
       - sqlserver
       - students-mvc
